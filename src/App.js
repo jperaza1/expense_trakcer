@@ -1,5 +1,6 @@
-import React from 'react'
+import React  from 'react'
 import { Grid } from '@material-ui/core';
+import { PushToTalkButton, PushToTalkButtonContainer, ErrorPanel } from '@speechly/react-ui';
 
 import Details from './components/Details/Details';
 import Main from './components/Main/Main';
@@ -8,7 +9,6 @@ import useStyle from './style';
 const App = () => {
 
     const classes = useStyle();
-
 
     return (
         <div>
@@ -23,6 +23,10 @@ const App = () => {
                      <Details title="Expense"/>
                  </Grid>
             </Grid>
+            <PushToTalkButtonContainer>
+                <PushToTalkButton captureKey=" " />
+                <ErrorPanel />
+            </PushToTalkButtonContainer>
         </div>
     )
 }

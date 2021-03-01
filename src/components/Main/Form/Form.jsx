@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { TextField, Typography, Grid, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
 import { ExpenseTrackerContext } from '../../../context/context';
 import { v4 as uuidv4 } from 'uuid'
 import moment from 'moment';
+import { useSpeechContext } from '@speechly/react-client';
 
 import { incomeCategories, expenseCategories } from '../../../constants/categories'
 
@@ -22,6 +23,8 @@ function Form() {
 
     const { addTransaction  } = useContext(ExpenseTrackerContext);
 
+    const { segment } = useSpeechContext();
+
     const createTransaction = () => {
         const transaction = {...formData, amount: Number(formData.amount), id: uuidv4() }
         addTransaction(transaction);
@@ -34,7 +37,11 @@ function Form() {
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Typography align="center" variant="subtitle2" gutterBottom>
-                    ...
+                    {segment && (
+                        <>
+                            {segment.words.map((word) => word.value).join(" ")}
+                        </>
+                    )}
                 </Typography>
             </Grid>
             <Grid item xs={6}>
